@@ -33,7 +33,7 @@ let foodList = [
   },
 ];
 
-let product = document.getElementsByClassName("product");
+let products = document.getElementsByClassName("product");
 
 function createProductCard(food) {
   let card = document.createElement("div");
@@ -46,20 +46,11 @@ function createProductCard(food) {
                             <div class="cost"><b>${food.cost}₫</b></div>
                         </div>
                         <div class="item-desc">${food.quantity}</div>
-                    </div>
-                    <div class="bot-card">
-                                                               
+                    </div>                                                           
      </div>`;
 
-  // let item = document.createElement("div");
-  // item.className = "item";
-  // item.innerHTML = `
-  // <div class="item-detail">
-  //     <div class="name"><b>${food.name}</b></div>
-  //     <div class="cost"><b>${food.cost}₫</b></div>
-  // </div>
-  // <div class="item-desc">${food.quantity}</div>
-  // `;
+  let item = document.createElement("div");
+  item.className = "item";
 
   let btnBox = document.createElement("div");
   btnBox.className = "bot-card";
@@ -74,7 +65,8 @@ function createProductCard(food) {
 
   btnBox.addEventListener("click", () => {
     if (food.quantity >= 0) {
-      food.quantity -= 1;
+      food.quantity --;
+      addToCart(food);
       card.innerHTML = `
       <img
       src="${food.imageURL}"
@@ -92,7 +84,10 @@ function createProductCard(food) {
       btnAdd.appendChild(btnText);
       btnBox.appendChild(btnAdd);
       card.appendChild(btnBox);
-      addToCart(food);
+    }
+    else {
+      alert("Hết đồ ăn rồi !!!!");
+      return;
     }
   });
 
@@ -101,8 +96,40 @@ function createProductCard(food) {
 
 
 
-for (let i = 0; i < product.length; i++) {
-  for (let j = 0; j < foodList.length; j++) {
-    product[i].appendChild(createProductCard(foodList[j]));
+let cartList = [];
+
+function addToCart(food) {
+  let isExist = false;
+  if (cartList.length == 0) {
+    cartList.push({
+      ...food,
+      stock: 1,
+      quantity: food.quantity,
+    });
+    console.log(cartList);
+    return;
+  }
+  for (let i = 0; i < cartList.length; i++) {
+    if (cartList[i].name == food.name) {
+      cartList[i].quantity = food.quantity;
+      cartList[i].stock += 1;
+      console.log(cartList);
+      isExist = true;
+      return;
+    }
+  }
+  if (!isExist) {
+    cartList.push({
+      ...food,
+      quantity: food.quantity,
+      stock: 1,
+    });
+    console.log(cartList);
+  }
+}
+
+for (let j = 0; j < foodList.length; j++) {
+  for(let z = 0; z < products.length; z++){
+    products[z].appendChild(createProductCard(foodList[j]));
   }
 }
