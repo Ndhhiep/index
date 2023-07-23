@@ -57,15 +57,15 @@ function createProductCard(food) {
 
   let btnAdd = document.createElement("button");
   let btnText = document.createElement("b");
-  btnText.innerText  = "Thêm";
+  btnText.innerText = "Thêm";
 
   btnAdd.appendChild(btnText);
   btnBox.appendChild(btnAdd);
   card.appendChild(btnBox);
 
   btnBox.addEventListener("click", () => {
-    if (food.quantity >= 0) {
-      food.quantity --;
+    if (food.quantity > 0) {
+      food.quantity--;
       addToCart(food);
       card.innerHTML = `
       <img
@@ -75,7 +75,7 @@ function createProductCard(food) {
     <div class="item">
       <div class="item-detail">
         <div class="name"><b>${food.name}</b></div>
-        <div class="cost"><b>${food.price}₫</b></div>
+        <div class="cost"><b>${food.cost}₫</b></div>
       </div>
       <div class="item-desc">Số lượng ${food.quantity}</div>
     
@@ -84,8 +84,7 @@ function createProductCard(food) {
       btnAdd.appendChild(btnText);
       btnBox.appendChild(btnAdd);
       card.appendChild(btnBox);
-    }
-    else {
+    } else {
       alert("Hết đồ ăn rồi !!!!");
       return;
     }
@@ -93,8 +92,6 @@ function createProductCard(food) {
 
   return card;
 }
-
-
 
 let cartList = [];
 
@@ -129,7 +126,7 @@ function addToCart(food) {
 }
 
 for (let j = 0; j < foodList.length; j++) {
-  for(let z = 0; z < products.length; z++){
+  for (let z = 0; z < products.length; z++) {
     products[z].appendChild(createProductCard(foodList[j]));
   }
 }
