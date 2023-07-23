@@ -39,18 +39,22 @@ function createProductCard(food) {
   let card = document.createElement("div");
   card.className = "item-card";
   card.innerHTML = `
-    <img src="${food.imageURL}" alt="">
+    <img src="${food.imageURL}" alt=""/>
                     <div class="item">  
-                        <div class="item-detail">
-                            <div class="name"><b>${food.name}</b></div>
-                            <div class="cost"><b>${food.cost}₫</b></div>
-                        </div>
-                        <div class="item-desc">${food.quantity}</div>
-                    </div>                                                           
+                        
+                        
+                    </div> 
      </div>`;
 
   let item = document.createElement("div");
   item.className = "item";
+  item.innerHTML = `
+    <div class="item-detail">
+      <div class="name"><b>${food.name}</b></div>
+      <div class="cost"><b>${food.cost}₫</b></div>
+    </div>
+    <div class="item-desc">${food.quantity}</div>
+  `;
 
   let btnBox = document.createElement("div");
   btnBox.className = "bot-card";
@@ -58,11 +62,16 @@ function createProductCard(food) {
   let btnAdd = document.createElement("button");
   let btnText = document.createElement("b");
   btnText.innerText = "Thêm";
+  
+  // let btnHover = document.createElement("button:hover");
 
   btnAdd.appendChild(btnText);
   btnBox.appendChild(btnAdd);
-  card.appendChild(btnBox);
+  // btnBox.appendChild(btnHover);
+  item.appendChild(btnBox);
+  card.appendChild(item);
 
+  
   btnBox.addEventListener("click", () => {
     if (food.quantity > 0) {
       food.quantity--;
@@ -76,14 +85,15 @@ function createProductCard(food) {
       <div class="item-detail">
         <div class="name"><b>${food.name}</b></div>
         <div class="cost"><b>${food.cost}₫</b></div>
-      </div>
-      <div class="item-desc">Số lượng ${food.quantity}</div>
+    </div>
+    <div class="item-desc">Số lượng ${food.quantity}</div>
     
     </div>
       `;
       btnAdd.appendChild(btnText);
       btnBox.appendChild(btnAdd);
-      card.appendChild(btnBox);
+      item.appendChild(btnBox);
+      card.appendChild(item);
     } else {
       alert("Hết đồ ăn rồi !!!!");
       return;
@@ -125,8 +135,9 @@ function addToCart(food) {
   }
 }
 
-for (let j = 0; j < foodList.length; j++) {
+
   for (let z = 0; z < products.length; z++) {
+    for (let j = 0; j < foodList.length; j++) {
     products[z].appendChild(createProductCard(foodList[j]));
   }
 }
