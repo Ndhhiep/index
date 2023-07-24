@@ -34,6 +34,7 @@ let foodList = [
 ];
 
 let products = document.getElementsByClassName("product");
+let list = document.getElementsByClassName("showcart");
 
 function createProductCard(food) {
   let card = document.createElement("div");
@@ -53,7 +54,7 @@ function createProductCard(food) {
       <div class="name"><b>${food.name}</b></div>
       <div class="cost"><b>${food.cost}₫</b></div>
     </div>
-    <div class="item-desc">${food.quantity}</div>
+    <div class="item-desc">Số lượng: ${food.quantity}</div>
   `;
 
   let btnBox = document.createElement("div");
@@ -62,38 +63,40 @@ function createProductCard(food) {
   let btnAdd = document.createElement("button");
   let btnText = document.createElement("b");
   btnText.innerText = "Thêm";
-  
-  // let btnHover = document.createElement("button:hover");
 
   btnAdd.appendChild(btnText);
   btnBox.appendChild(btnAdd);
-  // btnBox.appendChild(btnHover);
   item.appendChild(btnBox);
   card.appendChild(item);
 
-  
   btnBox.addEventListener("click", () => {
     if (food.quantity > 0) {
       food.quantity--;
       addToCart(food);
-      card.innerHTML = `
-      <img
-      src="${food.imageURL}"
-      alt=""
-    />
-    <div class="item">
+      item.innerHTML = `
       <div class="item-detail">
         <div class="name"><b>${food.name}</b></div>
         <div class="cost"><b>${food.cost}₫</b></div>
     </div>
     <div class="item-desc">Số lượng ${food.quantity}</div>
-    
-    </div>
       `;
       btnAdd.appendChild(btnText);
       btnBox.appendChild(btnAdd);
       item.appendChild(btnBox);
-      card.appendChild(item);
+
+      let cart_item = document.createElement("div");
+      cart_item.className = "cart_item";
+      cart_item.innerHTML = `
+    <div class="item-detail">
+      <div class="name"><b>${food.name}</b></div>
+      <div class="cost"><b>${food.cost}₫</b></div>
+    </div>
+    <div class="item-desc">Số lượng ${food.stock}</div>
+  `;
+      console.log(cart_item);
+
+      list[0].appendChild(cart_item);
+     
     } else {
       alert("Hết đồ ăn rồi !!!!");
       return;
@@ -102,6 +105,7 @@ function createProductCard(food) {
 
   return card;
 }
+
 
 let cartList = [];
 
@@ -135,9 +139,8 @@ function addToCart(food) {
   }
 }
 
-
-  for (let z = 0; z < products.length; z++) {
-    for (let j = 0; j < foodList.length; j++) {
+for (let z = 0; z < products.length; z++) {
+  for (let j = 0; j < foodList.length; j++) {
     products[z].appendChild(createProductCard(foodList[j]));
   }
 }

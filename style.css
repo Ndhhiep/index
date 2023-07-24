@@ -21,7 +21,7 @@ body {
   width: 40%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -47,6 +47,30 @@ body {
   width: 30px;
   height: 30px;
   margin-left: 10px;
+}
+
+.header > .right > div {
+  width: 50px;
+  height: auto;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+.header > .right > div > #btn_cartlist {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+.header > .right > div > #btn_cartlist > #cartlist {
+  width: 30px;
+  height: 30px;
+  margin: 10% 0px;
 }
 
 .delivery {
@@ -153,8 +177,8 @@ body {
   flex-wrap: wrap;
 }
 .container > .box > .product > .item-card {
-  margin: 10px;
-  padding: 10px;
+  margin: 1%;
+  padding: 1%;
   width: 23%;
   height: 50%;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
@@ -166,13 +190,13 @@ body {
 
 .container > .box > .product > .item-card > img {
   width: 99%;
-  height: 280px;
+  height: 50%;
   display: flex;
   justify-content: center;
 }
 
 .container > .box > .product > .item-card > .item {
-  padding: 5px 5px 10px;
+  padding: 1% 1% 2%;
 }
 
 .container > .box > .product > .item-card > .item > .item-detail {
@@ -206,6 +230,7 @@ body {
 .product > .item-card > .item> .bot-card > button:hover{
   background-color: #e4002b;
 }
+
 .product > .item-card > .item> .bot-card > button {
   width: 90%;
   height: 100%;
@@ -220,7 +245,6 @@ body {
   border-color: #ccc;
   border: none;
   cursor: pointer;
-  
 }
 
 .container > .box > .product > .item-card > .item> .bot-card > button > b {
@@ -332,4 +356,14 @@ body {
   width: 205px;
   height: 77px;
   border-radius: 10px;
+}
+
+.showcart>div{
+  display: flex;
+  justify-content: center;
+}
+
+.showcart > .cart_item{
+  display: flex;
+  flex-direction: column;
 }
